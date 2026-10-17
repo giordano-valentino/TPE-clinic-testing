@@ -139,12 +139,21 @@ class AsociadoDTOTest {
 
         assertThrows(AssertionError.class, () -> asociado.setCalle(null));
     }
-
+    /*
     @Test
     void testSetNumeroNoAceptaCero() {
         AsociadoDTO asociado = new AsociadoDTO();
 
         assertThrows(AssertionError.class, () -> asociado.setNumero(0));
+    }
+    Reemplazo por el de abajo, el codigo original rechaza el 0, cuando lo tendria que aceptar */
+    @Test
+    void testSetNumeroAceptaCero() {
+        AsociadoDTO asociado = new AsociadoDTO();
+
+        asociado.setNumero(0);
+
+        assertEquals(0, asociado.getNumero());
     }
 
     @Test
@@ -160,4 +169,80 @@ class AsociadoDTOTest {
 
         assertThrows(AssertionError.class, () -> asociado.setTelefono(null));
     }
+    
+    /* Gian: se prueba que el constructor no acepte ningun parametro en null*/
+    
+    @Test
+    void testConstructorNoAceptaNombreNull() {
+        assertThrows(AssertionError.class, () -> new AsociadoDTO(
+                null, "Perez", "12345678", "Mar del Plata", "Independencia", 1234, "2235555555"));
+    }
+
+    @Test
+    void testConstructorNoAceptaApellidoNull() {
+        assertThrows(AssertionError.class, () -> new AsociadoDTO(
+                "Juan", null, "12345678", "Mar del Plata", "Independencia", 1234, "2235555555"));
+    }
+
+    @Test
+    void testConstructorNoAceptaDniNull() {
+        assertThrows(AssertionError.class, () -> new AsociadoDTO(
+                "Juan", "Perez", null, "Mar del Plata", "Independencia", 1234, "2235555555"));
+    }
+
+    @Test
+    void testConstructorNoAceptaCiudadNull() {
+        assertThrows(AssertionError.class, () -> new AsociadoDTO(
+                "Juan", "Perez", "12345678", null, "Independencia", 1234, "2235555555"));
+    }
+
+    @Test
+    void testConstructorNoAceptaCalleNull() {
+        assertThrows(AssertionError.class, () -> new AsociadoDTO(
+                "Juan", "Perez", "12345678", "Mar del Plata", null, 1234, "2235555555"));
+    }
+
+    @Test
+    void testConstructorNoAceptaNumeroNegativo() {
+        assertThrows(AssertionError.class, () -> new AsociadoDTO(
+                "Juan", "Perez", "12345678", "Mar del Plata", "Independencia", -1, "2235555555"));
+    }
+
+    @Test
+    void testConstructorNoAceptaTelefonoNull() {
+        assertThrows(AssertionError.class, () -> new AsociadoDTO(
+                "Juan", "Perez", "12345678", "Mar del Plata", "Independencia", 1234, null));
+    }
+    /* fin Gian: se prueba que el constructor no acepte ningun parametro en null*/
+    
+    /* Gian: prueba de valores extremos en el numero. El 1 quizas tiene sentido,
+     * los demas no se si vale la pena*/
+    @Test
+    void testSetNumeroAceptaUno() {
+        AsociadoDTO asociado = new AsociadoDTO();
+
+        asociado.setNumero(1);
+
+        assertEquals(1, asociado.getNumero());
+    }
+
+    /*  Preguntar en la practica
+    @Test
+    void testSetNumeroAceptaMaximo() {
+        AsociadoDTO asociado = new AsociadoDTO();
+
+        asociado.setNumero(Integer.MAX_VALUE);
+
+        assertEquals(Integer.MAX_VALUE, asociado.getNumero());
+    }
+
+    @Test
+    void testSetNumeroNoAceptaMinimo() {
+        AsociadoDTO asociado = new AsociadoDTO();
+
+        assertThrows(AssertionError.class, () -> asociado.setNumero(Integer.MIN_VALUE));
+    }
+    */
+    /* fin Gian: prueba de valores extremos en el numero. */
+    
 }
