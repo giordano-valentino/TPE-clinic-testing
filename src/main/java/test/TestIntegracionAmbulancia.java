@@ -321,7 +321,7 @@ class TestIntegracionAmbulancia {
 
         ambulancia.setState(new TrasladandoPacienteClinicaState(ambulancia));
         
-        ambulancia.getEstadoActual().SolicitudDeTraslado();
+        ambulancia.getEstadoActual().SolicitudMantenimiento();
         
         assertInstanceOf(
         		TrasladandoPacienteClinicaState.class,
