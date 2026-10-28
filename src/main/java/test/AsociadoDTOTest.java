@@ -139,14 +139,7 @@ class AsociadoDTOTest {
 
         assertThrows(AssertionError.class, () -> asociado.setCalle(null));
     }
-    /*
-    @Test
-    void testSetNumeroNoAceptaCero() {
-        AsociadoDTO asociado = new AsociadoDTO();
-
-        assertThrows(AssertionError.class, () -> asociado.setNumero(0));
-    }
-    Reemplazo por el de abajo, el codigo original rechaza el 0, cuando lo tendria que aceptar */
+    
     @Test
     void testSetNumeroAceptaCero() {
         AsociadoDTO asociado = new AsociadoDTO();
@@ -171,7 +164,9 @@ class AsociadoDTOTest {
     }
     
     /* Gian: se prueba que el constructor no acepte ningun parametro en null*/
-    
+    /* Se comentan: la consigna pide probar solo las validaciones de los setters.
+     * Ademas el constructor no implementa validaciones, por lo que estos tests
+     * fallarian por una expectativa que el codigo nunca prometio.
     @Test
     void testConstructorNoAceptaNombreNull() {
         assertThrows(AssertionError.class, () -> new AsociadoDTO(
@@ -213,6 +208,7 @@ class AsociadoDTOTest {
         assertThrows(AssertionError.class, () -> new AsociadoDTO(
                 "Juan", "Perez", "12345678", "Mar del Plata", "Independencia", 1234, null));
     }
+    */
     /* fin Gian: se prueba que el constructor no acepte ningun parametro en null*/
     
     /* Gian: prueba de valores extremos en el numero. El 1 quizas tiene sentido,
@@ -226,7 +222,6 @@ class AsociadoDTOTest {
         assertEquals(1, asociado.getNumero());
     }
 
-    /*  Preguntar en la practica
     @Test
     void testSetNumeroAceptaMaximo() {
         AsociadoDTO asociado = new AsociadoDTO();
@@ -242,7 +237,144 @@ class AsociadoDTOTest {
 
         assertThrows(AssertionError.class, () -> asociado.setNumero(Integer.MIN_VALUE));
     }
-    */
     /* fin Gian: prueba de valores extremos en el numero. */
+
+    /* Test centinela: los assert solo se ejecutan con la opcion -ea de la JVM.
+     * Si este test falla, los resultados de los tests de validacion no son
+     * confiables (agregar -ea en Run Configurations > Arguments > VM arguments) */
+    @Test
+    void testAssertsHabilitados() {
+        assertThrows(AssertionError.class, () -> {
+            assert false;
+        }, "Los assert estan deshabilitados: ejecutar la JVM con -ea");
+    }
+
+    /* Integridad del estado: si un setter rechaza un valor, el atributo
+     * debe conservar el valor que tenia antes */
+    @Test
+    void testSetNombreNullNoModificaValorPrevio() {
+        AsociadoDTO asociado = new AsociadoDTO();
+        asociado.setNombre("Juan");
+
+        assertThrows(AssertionError.class, () -> asociado.setNombre(null));
+
+        assertEquals("Juan", asociado.getNombre());
+    }
+
+    @Test
+    void testSetApellidoNullNoModificaValorPrevio() {
+        AsociadoDTO asociado = new AsociadoDTO();
+        asociado.setApellido("Perez");
+
+        assertThrows(AssertionError.class, () -> asociado.setApellido(null));
+
+        assertEquals("Perez", asociado.getApellido());
+    }
+
+    @Test
+    void testSetDniNullNoModificaValorPrevio() {
+        AsociadoDTO asociado = new AsociadoDTO();
+        asociado.setDni("12345678");
+
+        assertThrows(AssertionError.class, () -> asociado.setDni(null));
+
+        assertEquals("12345678", asociado.getDni());
+    }
+
+    @Test
+    void testSetCiudadNullNoModificaValorPrevio() {
+        AsociadoDTO asociado = new AsociadoDTO();
+        asociado.setCiudad("Mar del Plata");
+
+        assertThrows(AssertionError.class, () -> asociado.setCiudad(null));
+
+        assertEquals("Mar del Plata", asociado.getCiudad());
+    }
+
+    @Test
+    void testSetCalleNullNoModificaValorPrevio() {
+        AsociadoDTO asociado = new AsociadoDTO();
+        asociado.setCalle("Independencia");
+
+        assertThrows(AssertionError.class, () -> asociado.setCalle(null));
+
+        assertEquals("Independencia", asociado.getCalle());
+    }
+
+    @Test
+    void testSetNumeroNegativoNoModificaValorPrevio() {
+        AsociadoDTO asociado = new AsociadoDTO();
+        asociado.setNumero(1234);
+
+        assertThrows(AssertionError.class, () -> asociado.setNumero(-1));
+
+        assertEquals(1234, asociado.getNumero());
+    }
+
+    @Test
+    void testSetTelefonoNullNoModificaValorPrevio() {
+        AsociadoDTO asociado = new AsociadoDTO();
+        asociado.setTelefono("2235555555");
+
+        assertThrows(AssertionError.class, () -> asociado.setTelefono(null));
+
+        assertEquals("2235555555", asociado.getTelefono());
+    }
+
+    /* String vacio: la validacion solo controla != null, por lo que "" se acepta.
+     * Se deja documentado como observacion para el informe */
+    @Test
+    void testSetNombreAceptaVacio() {
+        AsociadoDTO asociado = new AsociadoDTO();
+
+        asociado.setNombre("");
+
+        assertEquals("", asociado.getNombre());
+    }
+
+    @Test
+    void testSetApellidoAceptaVacio() {
+        AsociadoDTO asociado = new AsociadoDTO();
+
+        asociado.setApellido("");
+
+        assertEquals("", asociado.getApellido());
+    }
+
+    @Test
+    void testSetDniAceptaVacio() {
+        AsociadoDTO asociado = new AsociadoDTO();
+
+        asociado.setDni("");
+
+        assertEquals("", asociado.getDni());
+    }
+
+    @Test
+    void testSetCiudadAceptaVacio() {
+        AsociadoDTO asociado = new AsociadoDTO();
+
+        asociado.setCiudad("");
+
+        assertEquals("", asociado.getCiudad());
+    }
+
+    @Test
+    void testSetCalleAceptaVacio() {
+        AsociadoDTO asociado = new AsociadoDTO();
+
+        asociado.setCalle("");
+
+        assertEquals("", asociado.getCalle());
+    }
+
+    @Test
+    void testSetTelefonoAceptaVacio() {
+        AsociadoDTO asociado = new AsociadoDTO();
+
+        asociado.setTelefono("");
+
+        assertEquals("", asociado.getTelefono());
+    }
     
 }
