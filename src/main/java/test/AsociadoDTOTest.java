@@ -163,56 +163,6 @@ class AsociadoDTOTest {
         assertThrows(AssertionError.class, () -> asociado.setTelefono(null));
     }
     
-    /* Gian: se prueba que el constructor no acepte ningun parametro en null*/
-    /* Se comentan: la consigna pide probar solo las validaciones de los setters.
-     * Ademas el constructor no implementa validaciones, por lo que estos tests
-     * fallarian por una expectativa que el codigo nunca prometio.
-    @Test
-    void testConstructorNoAceptaNombreNull() {
-        assertThrows(AssertionError.class, () -> new AsociadoDTO(
-                null, "Perez", "12345678", "Mar del Plata", "Independencia", 1234, "2235555555"));
-    }
-
-    @Test
-    void testConstructorNoAceptaApellidoNull() {
-        assertThrows(AssertionError.class, () -> new AsociadoDTO(
-                "Juan", null, "12345678", "Mar del Plata", "Independencia", 1234, "2235555555"));
-    }
-
-    @Test
-    void testConstructorNoAceptaDniNull() {
-        assertThrows(AssertionError.class, () -> new AsociadoDTO(
-                "Juan", "Perez", null, "Mar del Plata", "Independencia", 1234, "2235555555"));
-    }
-
-    @Test
-    void testConstructorNoAceptaCiudadNull() {
-        assertThrows(AssertionError.class, () -> new AsociadoDTO(
-                "Juan", "Perez", "12345678", null, "Independencia", 1234, "2235555555"));
-    }
-
-    @Test
-    void testConstructorNoAceptaCalleNull() {
-        assertThrows(AssertionError.class, () -> new AsociadoDTO(
-                "Juan", "Perez", "12345678", "Mar del Plata", null, 1234, "2235555555"));
-    }
-
-    @Test
-    void testConstructorNoAceptaNumeroNegativo() {
-        assertThrows(AssertionError.class, () -> new AsociadoDTO(
-                "Juan", "Perez", "12345678", "Mar del Plata", "Independencia", -1, "2235555555"));
-    }
-
-    @Test
-    void testConstructorNoAceptaTelefonoNull() {
-        assertThrows(AssertionError.class, () -> new AsociadoDTO(
-                "Juan", "Perez", "12345678", "Mar del Plata", "Independencia", 1234, null));
-    }
-    */
-    /* fin Gian: se prueba que el constructor no acepte ningun parametro en null*/
-    
-    /* Gian: prueba de valores extremos en el numero. El 1 quizas tiene sentido,
-     * los demas no se si vale la pena*/
     @Test
     void testSetNumeroAceptaUno() {
         AsociadoDTO asociado = new AsociadoDTO();
@@ -237,11 +187,7 @@ class AsociadoDTOTest {
 
         assertThrows(AssertionError.class, () -> asociado.setNumero(Integer.MIN_VALUE));
     }
-    /* fin Gian: prueba de valores extremos en el numero. */
-
-    /* Test centinela: los assert solo se ejecutan con la opcion -ea de la JVM.
-     * Si este test falla, los resultados de los tests de validacion no son
-     * confiables (agregar -ea en Run Configurations > Arguments > VM arguments) */
+    
     @Test
     void testAssertsHabilitados() {
         assertThrows(AssertionError.class, () -> {
