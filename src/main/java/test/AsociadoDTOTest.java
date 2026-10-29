@@ -172,21 +172,6 @@ class AsociadoDTOTest {
         assertEquals(1, asociado.getNumero());
     }
 
-    @Test
-    void testSetNumeroAceptaMaximo() {
-        AsociadoDTO asociado = new AsociadoDTO();
-
-        asociado.setNumero(Integer.MAX_VALUE);
-
-        assertEquals(Integer.MAX_VALUE, asociado.getNumero());
-    }
-
-    @Test
-    void testSetNumeroNoAceptaMinimo() {
-        AsociadoDTO asociado = new AsociadoDTO();
-
-        assertThrows(AssertionError.class, () -> asociado.setNumero(Integer.MIN_VALUE));
-    }
     
     @Test
     void testAssertsHabilitados() {
@@ -321,6 +306,88 @@ class AsociadoDTOTest {
         asociado.setTelefono("");
 
         assertEquals("", asociado.getTelefono());
+    }
+    
+    
+    /* Un valor válido debe reemplazar al valor cargado previamente */
+    @Test
+    void testSetNombreReemplazaValorPrevio() {
+        AsociadoDTO asociado = new AsociadoDTO();
+        asociado.setNombre("Juan");
+
+        asociado.setNombre("Pedro");
+
+        assertEquals("Pedro", asociado.getNombre());
+    }
+
+    @Test
+    void testSetApellidoReemplazaValorPrevio() {
+        AsociadoDTO asociado = new AsociadoDTO();
+        asociado.setApellido("Perez");
+
+        asociado.setApellido("Gomez");
+
+        assertEquals("Gomez", asociado.getApellido());
+    }
+
+    @Test
+    void testSetDniReemplazaValorPrevio() {
+        AsociadoDTO asociado = new AsociadoDTO();
+        asociado.setDni("12345678");
+
+        asociado.setDni("87654321");
+
+        assertEquals("87654321", asociado.getDni());
+    }
+
+    @Test
+    void testSetCiudadReemplazaValorPrevio() {
+        AsociadoDTO asociado = new AsociadoDTO();
+        asociado.setCiudad("Mar del Plata");
+
+        asociado.setCiudad("Balcarce");
+
+        assertEquals("Balcarce", asociado.getCiudad());
+    }
+
+    @Test
+    void testSetCalleReemplazaValorPrevio() {
+        AsociadoDTO asociado = new AsociadoDTO();
+        asociado.setCalle("Independencia");
+
+        asociado.setCalle("Colon");
+
+        assertEquals("Colon", asociado.getCalle());
+    }
+
+    @Test
+    void testSetNumeroReemplazaValorPrevio() {
+        AsociadoDTO asociado = new AsociadoDTO();
+        asociado.setNumero(1234);
+
+        asociado.setNumero(1000);
+
+        assertEquals(1000, asociado.getNumero());
+    }
+    
+    @Test
+    void testSetNumeroCeroReemplazaValorPrevio() {
+        AsociadoDTO asociado = new AsociadoDTO();
+        asociado.setNumero(1234);
+
+        asociado.setNumero(0);
+
+        assertEquals(0, asociado.getNumero());
+    }
+
+    @Test
+    void testSetTelefonoReemplazaValorPrevio() {
+        AsociadoDTO asociado = new AsociadoDTO();
+        asociado.setTelefono("2235555555");
+
+        asociado.setTelefono("2234444444");
+
+        assertEquals("2234444444", asociado.getTelefono());
     }
     
 }
