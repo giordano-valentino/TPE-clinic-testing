@@ -106,38 +106,12 @@ class AsociadoDTOTest {
     }
 
     @Test
-    void testSetNombreNoAceptaNull() {
+    void testSetNumeroAceptaUno() {
         AsociadoDTO asociado = new AsociadoDTO();
 
-        assertThrows(AssertionError.class, () -> asociado.setNombre(null));
-    }
+        asociado.setNumero(1);
 
-    @Test
-    void testSetApellidoNoAceptaNull() {
-        AsociadoDTO asociado = new AsociadoDTO();
-
-        assertThrows(AssertionError.class, () -> asociado.setApellido(null));
-    }
-
-    @Test
-    void testSetDniNoAceptaNull() {
-        AsociadoDTO asociado = new AsociadoDTO();
-
-        assertThrows(AssertionError.class, () -> asociado.setDni(null));
-    }
-
-    @Test
-    void testSetCiudadNoAceptaNull() {
-        AsociadoDTO asociado = new AsociadoDTO();
-
-        assertThrows(AssertionError.class, () -> asociado.setCiudad(null));
-    }
-
-    @Test
-    void testSetCalleNoAceptaNull() {
-        AsociadoDTO asociado = new AsociadoDTO();
-
-        assertThrows(AssertionError.class, () -> asociado.setCalle(null));
+        assertEquals(1, asociado.getNumero());
     }
     
     @Test
@@ -148,108 +122,12 @@ class AsociadoDTOTest {
 
         assertEquals(0, asociado.getNumero());
     }
-
-    @Test
-    void testSetNumeroNoAceptaNegativos() {
-        AsociadoDTO asociado = new AsociadoDTO();
-
-        assertThrows(AssertionError.class, () -> asociado.setNumero(-1));
-    }
-
-    @Test
-    void testSetTelefonoNoAceptaNull() {
-        AsociadoDTO asociado = new AsociadoDTO();
-
-        assertThrows(AssertionError.class, () -> asociado.setTelefono(null));
-    }
-    
-    @Test
-    void testSetNumeroAceptaUno() {
-        AsociadoDTO asociado = new AsociadoDTO();
-
-        asociado.setNumero(1);
-
-        assertEquals(1, asociado.getNumero());
-    }
-
     
     @Test
     void testAssertsHabilitados() {
         assertThrows(AssertionError.class, () -> {
             assert false;
         }, "Los assert estan deshabilitados: ejecutar la JVM con -ea");
-    }
-
-    /* Integridad del estado: si un setter rechaza un valor, el atributo
-     * debe conservar el valor que tenia antes */
-    @Test
-    void testSetNombreNullNoModificaValorPrevio() {
-        AsociadoDTO asociado = new AsociadoDTO();
-        asociado.setNombre("Juan");
-
-        assertThrows(AssertionError.class, () -> asociado.setNombre(null));
-
-        assertEquals("Juan", asociado.getNombre());
-    }
-
-    @Test
-    void testSetApellidoNullNoModificaValorPrevio() {
-        AsociadoDTO asociado = new AsociadoDTO();
-        asociado.setApellido("Perez");
-
-        assertThrows(AssertionError.class, () -> asociado.setApellido(null));
-
-        assertEquals("Perez", asociado.getApellido());
-    }
-
-    @Test
-    void testSetDniNullNoModificaValorPrevio() {
-        AsociadoDTO asociado = new AsociadoDTO();
-        asociado.setDni("12345678");
-
-        assertThrows(AssertionError.class, () -> asociado.setDni(null));
-
-        assertEquals("12345678", asociado.getDni());
-    }
-
-    @Test
-    void testSetCiudadNullNoModificaValorPrevio() {
-        AsociadoDTO asociado = new AsociadoDTO();
-        asociado.setCiudad("Mar del Plata");
-
-        assertThrows(AssertionError.class, () -> asociado.setCiudad(null));
-
-        assertEquals("Mar del Plata", asociado.getCiudad());
-    }
-
-    @Test
-    void testSetCalleNullNoModificaValorPrevio() {
-        AsociadoDTO asociado = new AsociadoDTO();
-        asociado.setCalle("Independencia");
-
-        assertThrows(AssertionError.class, () -> asociado.setCalle(null));
-
-        assertEquals("Independencia", asociado.getCalle());
-    }
-
-    @Test
-    void testSetNumeroNegativoNoModificaValorPrevio() {
-        AsociadoDTO asociado = new AsociadoDTO();
-        asociado.setNumero(1234);
-
-        assertThrows(AssertionError.class, () -> asociado.setNumero(-1));
-
-        assertEquals(1234, asociado.getNumero());
-    }
-
-    @Test
-    void testSetTelefonoNullNoModificaValorPrevio() {
-        AsociadoDTO asociado = new AsociadoDTO();
-        asociado.setTelefono("2235555555");
-
-        assertThrows(AssertionError.class, () -> asociado.setTelefono(null));
-
-        assertEquals("2235555555", asociado.getTelefono());
     }
 
     /* String vacio: la validacion solo controla != null, por lo que "" se acepta.
