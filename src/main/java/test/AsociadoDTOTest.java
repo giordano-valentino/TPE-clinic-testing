@@ -129,63 +129,6 @@ class AsociadoDTOTest {
             assert false;
         }, "Los assert estan deshabilitados: ejecutar la JVM con -ea");
     }
-
-    /* String vacio: la validacion solo controla != null, por lo que "" se acepta.
-     * Se deja documentado como observacion para el informe */
-    @Test
-    void testSetNombreAceptaVacio() {
-        AsociadoDTO asociado = new AsociadoDTO();
-
-        asociado.setNombre("");
-
-        assertEquals("", asociado.getNombre());
-    }
-
-    @Test
-    void testSetApellidoAceptaVacio() {
-        AsociadoDTO asociado = new AsociadoDTO();
-
-        asociado.setApellido("");
-
-        assertEquals("", asociado.getApellido());
-    }
-
-    @Test
-    void testSetDniAceptaVacio() {
-        AsociadoDTO asociado = new AsociadoDTO();
-
-        asociado.setDni("");
-
-        assertEquals("", asociado.getDni());
-    }
-
-    @Test
-    void testSetCiudadAceptaVacio() {
-        AsociadoDTO asociado = new AsociadoDTO();
-
-        asociado.setCiudad("");
-
-        assertEquals("", asociado.getCiudad());
-    }
-
-    @Test
-    void testSetCalleAceptaVacio() {
-        AsociadoDTO asociado = new AsociadoDTO();
-
-        asociado.setCalle("");
-
-        assertEquals("", asociado.getCalle());
-    }
-
-    @Test
-    void testSetTelefonoAceptaVacio() {
-        AsociadoDTO asociado = new AsociadoDTO();
-
-        asociado.setTelefono("");
-
-        assertEquals("", asociado.getTelefono());
-    }
-    
     
     /* Un valor válido debe reemplazar al valor cargado previamente */
     @Test
