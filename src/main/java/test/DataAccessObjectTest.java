@@ -127,6 +127,7 @@ public class DataAccessObjectTest {
     }
     
     // 3. TESTEO DE MODIFICAR DATOS VIA DAO
+    /*
     @Test
     void testDemostrarInconsistenciaEnActualizar() throws SQLException {
         // Datos correspondientes a Maria Template (id = 2) modificados
@@ -141,6 +142,32 @@ public class DataAccessObjectTest {
 
         assertEquals("MariaModificada", registro1.getNombre(),
                 "Error Demostrado: la actualización impactó sobre el id=1 a causa del hardcodeo en BaseDeDatos.");
+    }
+    */
+    
+    @Test
+    void testDemostrarInconsistenciaEnActualizar() throws SQLException {
+        // Datos correspondientes a Maria Template (DNI 87654321, id = 2) modificados
+        Domicilio nuevoDom = new Domicilio("Calle Modificada", 456, "Mar del Plata");
+        Asociado mariaEditada = new Asociado("MariaModificada", "TemplateModificada", "87654321", "2238888888", nuevoDom);
+
+        dao.actualizar(mariaEditada);
+
+        // Segun la SRS, la actualizacion se realiza por DNI: debe modificarse Maria y Juan debe quedar intacto
+        ArrayList<AsociadoDTO> lista = dao.cargarBD();
+        AsociadoDTO maria = null;
+        AsociadoDTO juan = null;
+        for (AsociadoDTO dto : lista) {
+            if ("87654321".equals(dto.getDni())) {
+                maria = dto;
+            } else if ("12345678".equals(dto.getDni())) {
+                juan = dto;
+            }
+        }
+
+        assertEquals("MariaModificada", maria.getNombre(), "Los datos de Maria deben haberse actualizado.");
+      
+        assertEquals("Juan", juan.getNombre(), "Juan State no debe haber sido modificado.");
     }
 
     // 4. TESTEO DE ELIMINAR ASOCIADOS VIA DAO
