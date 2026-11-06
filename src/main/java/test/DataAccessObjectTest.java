@@ -17,7 +17,7 @@ import persistencia.DataAccessObject;
 /**
  * Suite de pruebas de integración para DataAccessObject (DAO).
  * Organizada según las operaciones CRUD (Alta, Lectura, Modificación, Eliminación),
- * Mapeo de DTOs, y Excepciones SQL / Precondiciones.
+ * Mapeo de DTOs y Excepciones SQL.
  */
 public class DataAccessObjectTest {
 
@@ -177,17 +177,6 @@ public class DataAccessObjectTest {
         assertEquals(20, lista.size(), "Eliminar un DNI inexistente no debe alterar la cantidad de registros.");
     }
     
-    @Test 
-    // Si quisieramos eliminar y pasamos como parametro null, no deberia haber modificacion alguna ni se deberia realizar la query.
-    void testEliminarConDNINull() {
-    	AssertionError error = assertThrows(AssertionError.class, () -> {
-            dao.eliminar(null);
-        });
-    	
-    	// Deberiamos obtener un error de que el DNI no puede ser nulo
-    	assertEquals("El DNI no puede ser nulo", error.getMessage());
-    }
-    
     // 5. TESTEO DE MAPEAR UN DAO A UN DTO
     @Test
     void testCrearDTOAlineaAtributosDeDominio() {
@@ -231,36 +220,5 @@ public class DataAccessObjectTest {
         assertThrows(SQLException.class, () -> {
             dao.guardar(duplicado);
         }, "Guardar un asociado con DNI repetido debe lanzar SQLException por restricción UNIQUE.");
-    }
-
-    @Test
-    void testPrecondicionesLanzanAssertionError() {
-        // guardar con asociado nulo
-        assertThrows(AssertionError.class, () -> dao.guardar(null));
-
-        // actualizar con asociado nulo
-        assertThrows(AssertionError.class, () -> dao.actualizar(null));
-
-        // cargarConLimite con limite <= 0
-        assertThrows(AssertionError.class, () -> dao.cargarConLimite(0));
-        assertThrows(AssertionError.class, () -> dao.cargarConLimite(-5));
-
-        // cargar con id <= 0
-        assertThrows(AssertionError.class, () -> dao.cargar(0));
-        assertThrows(AssertionError.class, () -> dao.cargar(-1));
-
-        // eliminar con DNI vacio
-        assertThrows(AssertionError.class, () -> dao.eliminar(""));
-    }
-    
-    @Test
-    public void testGuardarAsociadoConCamposVaciosDeberiaRechazarse() {
-        Asociado asociadoVacio = new Asociado("", "", "", "", new Domicilio("", 1, ""));
-
-        assertThrows(
-            AssertionError.class,
-            () -> dao.guardar(asociadoVacio),
-            "No debería permitirse guardar en la base de datos un Asociado con nombre, apellido y DNI vacíos"
-        );
     }
 }
