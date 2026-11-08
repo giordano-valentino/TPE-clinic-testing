@@ -127,24 +127,6 @@ public class DataAccessObjectTest {
     }
     
     // 3. TESTEO DE MODIFICAR DATOS VIA DAO
-    /*
-    @Test
-    void testDemostrarInconsistenciaEnActualizar() throws SQLException {
-        // Datos correspondientes a Maria Template (id = 2) modificados
-        Domicilio nuevoDom = new Domicilio("Calle Modificada", 456, "Mar del Plata");
-        Asociado mariaEditada = new Asociado("MariaModificada", "TemplateModificada", "87654321", "2238888888", nuevoDom);
-
-        dao.actualizar(mariaEditada);
-
-        // Debido que encontramos en el codigo una linea con en stmt.setInt(8, 1), el registro modificado fue el id = 1 (Juan State)
-        ArrayList<AsociadoDTO> lista = dao.cargarBD();
-        AsociadoDTO registro1 = lista.get(0); // Fila 1 en la base
-
-        assertEquals("MariaModificada", registro1.getNombre(),
-                "Error Demostrado: la actualización impactó sobre el id=1 a causa del hardcodeo en BaseDeDatos.");
-    }
-    */
-    
     @Test
     void testDemostrarInconsistenciaEnActualizar() throws SQLException {
         // Datos correspondientes a Maria Template (DNI 87654321, id = 2) modificados
